@@ -10,46 +10,47 @@
   *{box-sizing:border-box}
   body { font-family: 'Poppins', sans-serif; color:#fff; margin:0; min-height:100vh; display:flex; justify-content:center; align-items:center; padding:24px; background: #000 url('https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat fixed; }
   body::before{ content:''; position:fixed; inset:0; background: radial-gradient(1200px 600px at 80% -10%, rgba(233,30,99,0.25), transparent 60%), radial-gradient(800px 400px at -10% 110%, rgba(233,30,99,0.18), transparent 60%), rgba(0,0,0,0.65); z-index:-1; }
-.card { background: var(--vidro); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); width:100%; max-width:640px; border-radius:24px; padding:32px; border:1px solid var(--borda); box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 20px 60px rgba(0,0,0,0.5), 0 0 40px var(--rosa-glow); }
-.logo { font-size:28px; font-weight:800; text-align:center; margin-bottom:4px; letter-spacing:1px; }
-.logo span{color:#fff;text-shadow:0 0 10px #fff}.logo strong{color:var(--rosa); text-shadow:0 0 15px var(--rosa)}
-.sub { color:#d0d0d0; font-size:14px; text-align:center; margin-bottom:24px; }
-.row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px;}
+ .card { background: var(--vidro); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); width:100%; max-width:640px; border-radius:24px; padding:32px; border:1px solid var(--borda); box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 20px 60px rgba(0,0,0,0.5), 0 0 40px var(--rosa-glow); }
+ .logo { font-size:28px; font-weight:800; text-align:center; margin-bottom:4px; letter-spacing:1px; }
+ .logo span{color:#fff;text-shadow:0 0 10px #fff}.logo strong{color:var(--rosa); text-shadow:0 0 15px var(--rosa)}
+ .sub { color:#d0d0d0; font-size:14px; text-align:center; margin-bottom:4px; }
+ .escassez { color:var(--rosa); font-size:12px; font-weight:800; text-align:center; margin-bottom:24px; text-transform:uppercase; letter-spacing:1px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity:.6; } }
+ .row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px;}
   label{font-size:12px; color:#aaa; margin-bottom:6px; display:block; font-weight:600; text-transform:uppercase; letter-spacing:.5px;}
   input[disabled]{ width:100%; padding:14px; border-radius:14px; background: rgba(0,0,0,0.3); border:1px solid var(--borda); color:#eee; font-weight:600; backdrop-filter: blur(4px); }
-.topcal{display:flex; justify-content:space-between; align-items:center; margin:8px 0 14px;}
-.topcal button{background: rgba(0,0,0,0.3); border:1px solid var(--borda); color:#fff; border-radius:12px; padding:10px 14px; cursor:pointer; font-weight:800; font-size:18px; transition:.2s; backdrop-filter: blur(4px);}
-.topcal button:hover{border-color:var(--rosa); box-shadow:0 0 15px var(--rosa-glow)}
-.topcal button:disabled{opacity:.3; cursor:not-allowed}
-.mesano{font-weight:800; font-size:18px; color:#fff; letter-spacing:.5px}
-.semana{display:grid; grid-template-columns: repeat(7,1fr); gap:8px; color:#aaa; font-size:12px; text-align:center; margin-bottom:8px; font-weight:600;}
-.grid-7 { display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; min-height:280px; }
-.dia { padding:14px 0; border-radius:14px; background: rgba(0,0,0,0.3); border:1px solid var(--borda); text-align:center; font-weight:600; cursor:pointer; transition:.2s; user-select:none; backdrop-filter: blur(4px);}
-.dia:hover:not(.off) { border-color:var(--rosa); transform: translateY(-2px); box-shadow:0 8px 20px var(--rosa-glow); }
-.dia.off { background: rgba(0,0,0,0.2); color:#444; border-color:transparent; cursor:not-allowed; }
-.dia.on { border-color: var(--rosa); background: rgba(233,30,99,0.15); box-shadow: 0 0 10px var(--rosa-glow); } /* CORRIGIDO: AGORA FICA ROSA */
-.dia.sel { background:var(--rosa); color:#000; border-color:var(--rosa); box-shadow: 0 0 25px var(--rosa-glow); font-weight:800; }
-.box { display:none; margin-top:24px; padding-top:20px; border-top:1px solid var(--borda); }
-.titulo-bloco{font-weight:700; margin:0 0 12px; font-size:15px; color:#ddd;}
-.grid-3 { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; }
-.hora { padding:14px; text-align:center; border-radius:14px; background: rgba(0,0,0,0.3); border:1px solid var(--borda); font-weight:600; cursor:pointer; transition:.2s; backdrop-filter: blur(4px);}
-.hora:hover{border-color:var(--rosa); box-shadow:0 0 15px var(--rosa-glow)}
-.hora.sel { background:var(--rosa); color:#000; border-color:var(--rosa); font-weight:800; box-shadow: 0 0 25px var(--rosa-glow); }
-.btn{ width:100%; padding:18px; border-radius:14px; border:0; background: linear-gradient(90deg, #E91E63, #FF4081); color:#fff; font-weight:800; font-size:16px; margin-top:20px; cursor:pointer; transition:.3s; box-shadow: 0 8px 25px var(--rosa-glow); }
-.btn:disabled{opacity:.4; cursor:not-allowed; box-shadow:none; filter:grayscale(.5)}
-.btn:hover:not(:disabled){transform: translateY(-2px); box-shadow: 0 12px 30px var(--rosa-glow)}
-.btn-whats{ width:100%; padding:18px; border-radius:14px; border:0; background: linear-gradient(90deg, var(--rosa), var(--verde-whats)); color:#fff; font-weight:800; font-size:16px; margin-top:12px; cursor:pointer; transition:.3s; box-shadow: 0 8px 25px rgba(37,211,102,0.4); text-decoration:none; display:none; text-align:center;}
-.btn-whats:hover{transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37,211,102,0.6)}
-.msg{text-align:center; margin-top:14px; font-weight:600}
-.msg.ok{color:#4ade80; text-shadow:0 0 10px #4ade80}
-.msg.erro{color:#f87171; text-shadow:0 0 10px #f87171; font-size:12px} /* NOVO: ERRO NA TELA */
-.loading{text-align:center; color:#aaa; padding:40px 0;}
+ .topcal{display:flex; justify-content:space-between; align-items:center; margin:8px 0 14px;}
+ .topcal button{background: rgba(0,0,0,0.3); border:1px solid var(--borda); color:#fff; border-radius:12px; padding:10px 14px; cursor:pointer; font-weight:800; font-size:18px; transition:.2s; backdrop-filter: blur(4px);}
+ .topcal button:hover{border-color:var(--rosa); box-shadow:0 0 15px var(--rosa-glow)}
+ .topcal button:disabled{opacity:.3; cursor:not-allowed}
+ .mesano{font-weight:800; font-size:18px; color:#fff; letter-spacing:.5px}
+ .semana{display:grid; grid-template-columns: repeat(7,1fr); gap:8px; color:#aaa; font-size:12px; text-align:center; margin-bottom:8px; font-weight:600;}
+ .grid-7 { display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; min-height:280px; }
+ .dia { padding:14px 0; border-radius:14px; background: rgba(0,0,0,0.3); border:1px solid var(--borda); text-align:center; font-weight:600; cursor:pointer; transition:.2s; user-select:none; backdrop-filter: blur(4px);}
+ .dia:hover:not(.off) { border-color:var(--rosa); transform: translateY(-2px); box-shadow:0 8px 20px var(--rosa-glow); }
+ .dia.off { background: rgba(0,0,0,0.2); color:#444; border-color:transparent; cursor:not-allowed; }
+ .dia.on { border-color: var(--rosa); background: rgba(233,30,99,0.15); box-shadow: 0 0 10px var(--rosa-glow); }
+ .dia.sel { background:var(--rosa); color:#000; border-color:var(--rosa); box-shadow: 0 0 25px var(--rosa-glow); font-weight:800; }
+ .box { display:none; margin-top:24px; padding-top:20px; border-top:1px solid var(--borda); }
+ .titulo-bloco{font-weight:700; margin:0 0 12px; font-size:15px; color:#ddd;}
+ .grid-3 { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; }
+ .hora { padding:14px; text-align:center; border-radius:14px; background: rgba(0,0,0,0.3); border:1px solid var(--borda); font-weight:600; cursor:pointer; transition:.2s; backdrop-filter: blur(4px);}
+ .hora:hover{border-color:var(--rosa); box-shadow:0 0 15px var(--rosa-glow)}
+ .hora.sel { background:var(--rosa); color:#000; border-color:var(--rosa); font-weight:800; box-shadow: 0 0 25px var(--rosa-glow); }
+ .btn{ width:100%; padding:18px; border-radius:14px; border:0; background: linear-gradient(90deg, #E91E63, #FF4081); color:#fff; font-weight:800; font-size:16px; margin-top:20px; cursor:pointer; transition:.3s; box-shadow: 0 8px 25px var(--rosa-glow); }
+ .btn:disabled{opacity:.4; cursor:not-allowed; box-shadow:none; filter:grayscale(.5)}
+ .btn:hover:not(:disabled){transform: translateY(-2px); box-shadow: 0 12px 30px var(--rosa-glow)}
+ .btn-whats{ width:100%; padding:18px; border-radius:14px; border:0; background: linear-gradient(90deg, var(--rosa), var(--verde-whats)); color:#fff; font-weight:800; font-size:16px; margin-top:12px; cursor:pointer; transition:.3s; box-shadow: 0 8px 25px rgba(37,211,102,0.4); text-decoration:none; display:none; text-align:center;}
+ .btn-whats:hover{transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37,211,102,0.6)}
+ .msg{text-align:center; margin-top:14px; font-weight:600}
+ .msg.ok{color:#4ade80; text-shadow:0 0 10px #4ade80}
 </style>
 </head>
 <body>
   <div class="card">
     <div class="logo"><span>PRETA</span><strong>NAILS</strong></div>
-    <div class="sub">Selecione data e horário disponível</div>
+    <div class="sub">Escolha data e horário</div>
+    <div class="escassez">🔥 VAGAS LIMITADAS - SOMENTE 1 VAGA POR HORÁRIO</div>
 
     <div class="row">
       <div><label>Nome</label><input id="nome" disabled></div>
@@ -63,29 +64,28 @@
       <button id="next">></button>
     </div>
     <div class="semana"><div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div></div>
-    <div class="grid-7" id="cal"><div class="loading">Carregando agenda...</div></div>
+    <div class="grid-7" id="cal"></div>
 
     <div class="box" id="boxHoras">
       <div class="titulo-bloco">2. Escolha o horário</div>
       <div class="grid-3" id="horas"></div>
     </div>
 
-    <button class="btn" id="btn" disabled>Confirmar Agendamento</button>
+    <button class="btn" id="btn" disabled>GARANTA SEU HORÁRIO 💅</button>
     <a href="https://wa.me/+5511982311608" target="_blank" class="btn-whats" id="btnWhats">Falar no WhatsApp 💬</a>
     <div id="msg" class="msg"></div>
   </div>
 
 <script>
-// SUA API
-const AP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJmS2PAGTGcjq7Of0109AfdR5lr2TOEe_rCRNCI1iWz9SnrqXF5moav_uBYRwSUQ/exec';
+const STORAGE_KEY = 'MinhaAgenda';
+const AGENDAS_KEY = 'agendamentosPreta'; // Onde salvamos local
 
-// Pega dados da ficha
-const ficha = JSON.parse(localStorage.getItem('MinhaAgenda') || '{}');
+// 1. Puxa dados da ficha
+const ficha = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 document.getElementById('nome').value = ficha.nome || '';
 document.getElementById('zap').value = ficha.whatsapp || '';
 
-// Estado
-let agenda = {};
+// 2. Estado
 let dataSel = '';
 let horaSel = '';
 const hoje = new Date(); hoje.setHours(0,0,0,0);
@@ -93,6 +93,7 @@ let mesAtual = hoje.getMonth();
 let anoAtual = hoje.getFullYear();
 const LIMITE_ANO = 2099;
 const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const HORARIOS = ['09:00','10:00','11:00','14:00','15:00','16:00','17:00']; // Horários fixos
 
 document.getElementById('prev').onclick = () => mudarMes(-1);
 document.getElementById('next').onclick = () => mudarMes(1);
@@ -101,14 +102,10 @@ function mudarMes(dir){
   const novoMes = mesAtual + dir;
   const novoAno = anoAtual + (novoMes < 0? -1 : novoMes > 11? 1 : 0);
   const mesAjustado = (novoMes + 12) % 12;
-
   if(novoAno < hoje.getFullYear() || (novoAno === hoje.getFullYear() && mesAjustado < hoje.getMonth())) return;
   if(novoAno > LIMITE_ANO) return;
-
-  mesAtual = mesAjustado;
-  anoAtual = novoAno;
-  atualizarBotoesMes();
-  montarCalendario();
+  mesAtual = mesAjustado; anoAtual = novoAno;
+  atualizarBotoesMes(); montarCalendario();
 }
 
 function atualizarBotoesMes(){
@@ -116,35 +113,15 @@ function atualizarBotoesMes(){
   document.getElementById('next').disabled = (anoAtual === LIMITE_ANO && mesAtual === 11);
 }
 
-async function carregar(){
-  const msgBox = document.getElementById('msg');
-  msgBox.className = 'msg';
-  msgBox.textContent = 'Conectando com a agenda...';
-
-  try{
-    // CORREÇÃO 1: CORS + NO-CACHE pra matar o bug
-    const r = await fetch(AP_SCRIPT_URL + '?action=getAvailability&nocache=' + Date.now(), {mode: 'cors', cache: 'no-store'});
-    if(!r.ok) throw new Error('API off: ' + r.status);
-    const dados = await r.json();
-    console.log('API Retornou:', dados);
-    if(!dados || Object.keys(dados).length === 0) throw new Error('Agenda vazia na planilha');
-    agenda = dados;
-    msgBox.textContent = '';
-  }catch(e){
-    console.error('ERRO API:', e);
-    // CORREÇÃO 2: Mostra erro na tela
-    msgBox.className = 'msg erro';
-    msgBox.textContent = 'Erro API: ' + e.message;
-    agenda = {};
-  }
-  atualizarBotoesMes();
-  montarCalendario();
+function getAgendamentos(){
+  return JSON.parse(localStorage.getItem(AGENDAS_KEY) || '[]');
 }
 
 function montarCalendario(){
   document.getElementById('mesano').textContent = `${meses[mesAtual]} ${anoAtual}`;
   const cal = document.getElementById('cal');
   cal.innerHTML = '';
+  const agendamentos = getAgendamentos();
   const primeiroDia = new Date(anoAtual, mesAtual, 1).getDay();
   const diasNoMes = new Date(anoAtual, mesAtual + 1, 0).getDate();
 
@@ -153,14 +130,15 @@ function montarCalendario(){
     const dataDoDia = new Date(anoAtual, mesAtual, dia);
     dataDoDia.setHours(0,0,0,0);
     const key = `${anoAtual}-${String(mesAtual+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+    const horariosOcupados = agendamentos.filter(a => a.data === key).map(a => a.hora);
+    const temVaga = HORARIOS.some(h =>!horariosOcupados.includes(h)); // Tem vaga se 1 horário livre
 
     const div = document.createElement('div');
     div.className = 'dia';
     div.textContent = dia;
-
-    if(dataDoDia >= hoje && agenda[key] && agenda[key].length > 0){
-      div.classList.add('on'); // AGORA VAI FICAR ROSA
-      div.onclick = () => selecionarDia(key, div);
+    if(dataDoDia >= hoje && temVaga){
+      div.classList.add('on'); // Só fica rosa se tiver vaga
+      div.onclick = () => selecionarDia(key, div, horariosOcupados);
     } else {
       div.classList.add('off');
     }
@@ -168,63 +146,44 @@ function montarCalendario(){
   }
 }
 
-function selecionarDia(key, el){
+function selecionarDia(key, el, ocupados){
   document.querySelectorAll('.dia').forEach(x=>x.classList.remove('sel'));
   el.classList.add('sel');
   dataSel = key;
   const box = document.getElementById('boxHoras');
   const wrap = document.getElementById('horas');
   wrap.innerHTML = '';
-  (agenda[key]||[]).forEach(h=>{
-    const b = document.createElement('div');
-    b.className = 'hora'; b.textContent = h;
-    b.onclick = () => {
-      document.querySelectorAll('.hora').forEach(x=>x.classList.remove('sel'));
-      b.classList.add('sel'); horaSel = h; document.getElementById('btn').disabled = false;
-    };
-    wrap.appendChild(b);
+  HORARIOS.forEach(h=>{
+    if(!ocupados.includes(h)){ // Só mostra horário livre
+      const b = document.createElement('div');
+      b.className = 'hora'; b.textContent = h;
+      b.onclick = () => {
+        document.querySelectorAll('.hora').forEach(x=>x.classList.remove('sel'));
+        b.classList.add('sel'); horaSel = h; document.getElementById('btn').disabled = false;
+      };
+      wrap.appendChild(b);
+    }
   });
-  box.style.display='block';
+  box.style.display = wrap.children.length > 0? 'block' : 'none';
   document.getElementById('btn').disabled = true;
 }
 
-document.getElementById('btn').onclick = async ()=>{
+document.getElementById('btn').onclick = ()=>{
   if(!dataSel ||!horaSel) return;
-  const payload = {
-    nome:ficha.nome,
-    whatsapp:ficha.whatsapp,
-    servico:ficha.servico||'Serviço',
-    data:dataSel,
-    hora:horaSel
-  };
+  const agendamentos = getAgendamentos();
+  agendamentos.push({nome:ficha.nome, whatsapp:ficha.whatsapp, data:dataSel, hora:horaSel});
+  localStorage.setItem(AGENDAS_KEY, JSON.stringify(agendamentos));
 
-  document.getElementById('btn').disabled = true;
-  document.getElementById('msg').textContent = 'Enviando Ficha...';
-  document.getElementById('msg').className = 'msg';
-
-  try{
-    const r = await fetch(AP_SCRIPT_URL + '?action=book', {method:'POST', mode: 'cors', body:JSON.stringify(payload)});
-    const res = await r.json();
-
-    if(res.ok){
-      document.getElementById('msg').textContent = 'Agendamento confirmado! ✅';
-      document.getElementById('msg').className = 'msg ok';
-      document.getElementById('boxHoras').style.display='none';
-      document.getElementById('btn').style.display='none';
-      document.getElementById('btnWhats').style.display='block';
-      localStorage.removeItem('fichaPretaNails');
-    } else {
-      throw new Error(res.error || 'Erro');
-    }
-  }catch(e){
-    document.getElementById('msg').textContent = 'Erro ao reservar. Tente novamente.';
-    document.getElementById('msg').className = 'msg erro';
-    document.getElementById('btn').disabled = false;
-    console.error('Erro ao bookar:', e);
-  }
+  document.getElementById('msg').textContent = 'Horário reservado! ✅ Chama no WhatsApp pra confirmar.';
+  document.getElementById('msg').className = 'msg ok';
+  document.getElementById('boxHoras').style.display='none';
+  document.getElementById('btn').style.display='none';
+  document.getElementById('btnWhats').style.display='block';
+  localStorage.removeItem(STORAGE_KEY); // Limpa ficha depois de agendar
 };
 
-carregar();
+atualizarBotoesMes();
+montarCalendario();
 </script>
 </body>
 </html>
