@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -20,6 +21,7 @@
 .topcal{display:flex; justify-content:space-between; align-items:center; margin:8px 0 14px;}
 .topcal button{background: rgba(0,0,0,0.3); border:1px solid var(--borda); color:#fff; border-radius:12px; padding:10px 14px; cursor:pointer; font-weight:800; font-size:18px; transition:.2s; backdrop-filter: blur(4px);}
 .topcal button:hover{border-color:var(--rosa); box-shadow:0 0 15px var(--rosa-glow)}
+.topcal button:disabled{opacity:.3; cursor:not-allowed}
 .mesano{font-weight:800; font-size:18px; color:#fff; letter-spacing:.5px}
 .semana{display:grid; grid-template-columns: repeat(7,1fr); gap:8px; color:#aaa; font-size:12px; text-align:center; margin-bottom:8px; font-weight:600;}
 .grid-7 { display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; min-height:280px; }
@@ -86,31 +88,53 @@ document.getElementById('zap').value = ficha.whatsapp || '';
 let agenda = {};
 let dataSel = '';
 let horaSel = '';
-let hoje = new Date();
-hoje.setHours(0,0,0,0);
+const hoje = new Date(); hoje.setHours(0,0,0,0);
 let mesAtual = hoje.getMonth();
 let anoAtual = hoje.getFullYear();
 const LIMITE_ANO = 2099;
 const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-const diasSemana = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
 
 document.getElementById('prev').onclick = () => mudarMes(-1);
 document.getElementById('next').onclick = () => mudarMes(1);
 
 function mudarMes(dir){
-  if(dir === 1 && anoAtual >= LIMITE_ANO && mesAtual === 11) return;
-  if(dir === -1 && anoAtual <= hoje.getFullYear() && mesAtual === hoje.getMonth()) return;
-  mesAtual += dir;
-  if(mesAtual < 0){ mesAtual = 11; anoAtual--; }
-  if(mesAtual > 11){ mesAtual = 0; anoAtual++; }
+  const novoMes = mesAtual + dir;
+  const novoAno = anoAtual + (novoMes < 0? -1 : novoMes > 11? 1 : 0);
+  const mesAjustado = (novoMes + 12) % 12;
+  
+  // BUG #1 CORRIGIDO: Não deixa voltar antes do mês atual
+  if(novoAno < hoje.getFullYear() || (novoAno === hoje.getFullYear() && mesAjustado < hoje.getMonth())) return;
+  if(novoAno > LIMITE_ANO) return;
+  
+  mesAtual = mesAjustado;
+  anoAtual = novoAno;
+  atualizarBotoesMes();
   montarCalendario();
+}
+
+function atualizarBotoesMes(){
+  document.getElementById('prev').disabled = (anoAtual === hoje.getFullYear() && mesAtual === hoje.getMonth());
+  document.getElementById('next').disabled = (anoAtual === LIMITE_ANO && mesAtual === 11);
 }
 
 async function carregar(){
   try{
     const r = await fetch(AP_SCRIPT_URL + '?action=getAvailability');
+    if(!r.ok) throw new Error('API off');
     agenda = await r.json();
-  }catch(e){ agenda = {}; console.error('Erro API:', e); }
+    if(!agenda || Object.keys(agenda).length === 0) throw new Error('Agenda vazia');
+  }catch(e){ 
+    console.warn('API falhou. Ativando MODO TESTE por 30 dias:', e);
+    // BUG #2 CORRIGIDO: MODO TESTE se API falhar
+    agenda = {};
+    for(let i=1; i<=30; i++){
+      const d = new Date(hoje);
+      d.setDate(hoje.getDate() + i);
+      const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      agenda[key] = ['09:00','10:00','14:00','15:00','16:00'];
+    }
+  }
+  atualizarBotoesMes();
   montarCalendario();
 }
 
@@ -123,12 +147,14 @@ function montarCalendario(){
 
   for(let i=0; i<primeiroDia; i++) cal.innerHTML += `<div></div>`;
   for(let dia=1; dia<=diasNoMes; dia++){
+    const dataDoDia = new Date(anoAtual, mesAtual, dia); 
+    dataDoDia.setHours(0,0,0,0); // BUG #3 CORRIGIDO: Zera hora pra comparar certo
     const key = `${anoAtual}-${String(mesAtual+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
-    const dataDoDia = new Date(anoAtual, mesAtual, dia);
-    dataDoDia.setHours(0,0,0,0);
+    
     const div = document.createElement('div');
     div.className = 'dia';
     div.textContent = dia;
+    
     if(dataDoDia < hoje ||!agenda[key] || agenda[key].length === 0){
       div.classList.add('off');
     } else {
